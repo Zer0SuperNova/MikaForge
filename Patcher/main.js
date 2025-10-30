@@ -44,6 +44,11 @@ async function main()
     }
 }
 
+/**
+ * Finds the path of the CurseForge folder in the local programs directory.
+ * If an error occurs while searching the directory, the function will return null.
+ * @returns {string|null} The path of the CurseForge folder, or null if not found.
+ */
 async function findCurseForge() {
     const localProgramsPath = path.join(
         process.env.LOCALAPPDATA,
@@ -73,6 +78,11 @@ async function findCurseForge() {
 }
 
 
+/**
+ * Copies the MikaForge bridge script to the destination path.
+ * If the source file does not exist, permission is denied, or an error occurs while copying the file, the function will log an error.
+ * @param {string} destinationPath - The path where the bridge script will be copied to.
+ */
 async function addBridgeScript(destinationPath) {
     const sourcePath = './Payload/_____MikaForgeBridge_____.js';
     const destinationFile = path.join(destinationPath, path.basename(sourcePath));
@@ -93,6 +103,12 @@ async function addBridgeScript(destinationPath) {
     }
 }
 
+/**
+ * Copies the MikaForge code from the Payload directory to the destination directory.
+ * If permission is denied, or an error occurs while copying the file, the function will log an error.
+ * @param {string} sourceDir - The path to the MikaForge code directory.
+ * @param {string} destinationDir - The path where the MikaForge code will be copied to.
+ */
 async function saveMikaForgeCode() {
     const sourceDir = './Payload/Mikaforge';
     const destinationDir = path.join(process.env.APPDATA, 'MikaForge');
@@ -110,6 +126,10 @@ async function saveMikaForgeCode() {
     }
 }
 
+/**
+ * Creates the plugins folder in the app data directory if it doesn't already exist.
+ * If permission is denied, or an error occurs while creating the folder, the function will log an error.
+ */
 async function createPluginsFolder()
 {
     try

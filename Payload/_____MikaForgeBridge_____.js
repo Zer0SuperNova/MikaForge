@@ -11,6 +11,13 @@ app.on('browser-window-created', (e, window) => {
 });
 
 
+/**
+ * Loads the MikaForge engine from the index.js file in the app data directory.
+ * If the file does not exist or is not accessible, the function will throw an error.
+ * If the module cannot be imported, the function will also throw an error.
+ * If an error occurs, the application will exit with code -1.
+ * @throws {Error} If the file does not exist or is not accessible, or if the module cannot be imported.
+ */
 async function loadEngine() {
     const configPath = path.join(process.env.APPDATA, 'MikaForge', 'index.js');
     
