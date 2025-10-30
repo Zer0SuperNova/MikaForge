@@ -9,9 +9,6 @@ MikaForge modifies the CurseForge desktop client to add a plugin system, similar
 ## Features
 
 - Plugin support for CurseForge
-- Hot-reload plugins without restarting (Not Available Yet)
-- Simple API for developers (Not Available Yet)
-- Doesn't break on CurseForge updates (usually) (Not Available Yet)
 
 ## Installation
 
