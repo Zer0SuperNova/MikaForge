@@ -1,5 +1,8 @@
 (function() {
-    'use strict';    
+    'use strict';
+    
+    // Mark this plugin as loaded
+    window.__mikaForgePremium = true;    
     const fakeSubscription = {
         active: true,
         details: {

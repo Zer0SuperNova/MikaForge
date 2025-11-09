@@ -28,8 +28,9 @@ async function main()
             throw new Error('Failed to patch ASAR file');
         }
 
-        // check if plugins folder exists, if not create it
-        await createPluginsFolder();
+        // folder utils
+        await createMikaForgeFolder('plugins'); // <- plugins folder
+        await createMikaForgeFolder('themes');  // <- themes folder
 
         // add the bridge script to the MikaForge folder
         await addBridgeScript(CurseForgePathResource);
@@ -110,11 +111,11 @@ async function addBridgeScript(destinationPath) {
  * @param {string} destinationDir - The path where the MikaForge code will be copied to.
  */
 async function saveMikaForgeCode() {
-    const sourceDir = './Payload/Mikaforge';
+    const sourceDir = './Payload/MikaForge';
     const destinationDir = path.join(process.env.APPDATA, 'MikaForge');
     
     try {
-        // copy MikaForge code
+        // copy MikaForge code (including core folder)
         await fs.cp(sourceDir, destinationDir, { 
             recursive: true,
             force: true 
@@ -125,31 +126,26 @@ async function saveMikaForgeCode() {
         logger.error(`Failed to copy MikaForge directory: ${error.message}`);
     }
 }
-
 /**
- * Creates the plugins folder in the app data directory if it doesn't already exist.
- * If permission is denied, or an error occurs while creating the folder, the function will log an error.
+ * Creates a folder in the MikaForge directory if it does not already exist.
+ * If an error occurs while creating the folder, the function will log an error.
+ * @param {string} folderName - The name of the folder to create.
  */
-async function createPluginsFolder()
-{
-    try
-    {
-        // check if folder already exists
-        if(await fs.access(path.join(process.env.APPDATA, 'MikaForge', 'plugins')).then(() => true).catch(() => false)) {
+
+async function createMikaForgeFolder(folderName) {
+    try {
+        const folderPath = path.join(process.env.APPDATA, 'MikaForge', folderName);
+        const exists = await fs.access(folderPath).then(() => true).catch(() => false);
+
+        if (exists) {
             return;
         }
 
-        // if not, create folder
-        const pluginsPath = path.join(process.env.APPDATA, 'MikaForge', 'plugins');
-        await fs.mkdir(pluginsPath);
-    }
-    catch (error)
-    {
-        logger.error(`Failed to create plugins folder: ${error.message}`);
+        await fs.mkdir(folderPath);
+    } catch (error) {
+        logger.error(`Failed to create ${folderName} folder: ${error.message}`);
     }
 }
-
-
 
 // load the engine
 await main();
