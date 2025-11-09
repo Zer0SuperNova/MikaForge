@@ -2,6 +2,17 @@
 
 A plugin framework for CurseForge that lets you customize and extend the app with community-made plugins.
 
+# Screenshots
+<div style="display: flex; gap: 10px;">
+  <img src="Screenshots/image1.png" alt="Alt text" width="400" />
+  <img src="Screenshots/image2.png" alt="Alt text" width="400" />
+  <img src="Screenshots/image3.png" alt="Alt text" width="400" />
+  <img src="Screenshots/image4.png" alt="Alt text" width="400" />
+  <img src="Screenshots/image5.png" alt="Alt text" width="400" />
+</div>
+
+
+
 ## What is this?
 
 MikaForge modifies the CurseForge desktop client to add a plugin system, similar to what Vencord does for Discord. Load custom plugins to add features, tweak the UI, or change how the app behaves.
