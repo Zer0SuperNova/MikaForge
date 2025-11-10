@@ -54,7 +54,7 @@ No.
 Pull requests welcome. Keep code clean and document what you're doing.
 
 ## A friendly note
-Thanks for using MikaForge! I built this to make CurseForge more fun and flexible for everyone. I'm just one person working on this in my spare time, so please be patient if updates are a bit slow or bugs stick around for a while. If you find issues or have cool ideas, hit me up! I'd love to hear what you think. Have fun making plugins! 
+Thanks for using MikaForge! We built this to make CurseForge more fun and flexible for everyone. There are just two of us working on this in our spare time, so please be patient if updates are a bit slow or bugs stick around for a while. If you find issues or have cool ideas, let us know! We'd love to hear what you think. Have fun making plugins! 
 
 ## License
 
