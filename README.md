@@ -1,4 +1,6 @@
 # MikaForge
+![Build Status](https://github.com/Zer0SuperNova/MikaForge/actions/workflows/buncompiler.yml/badge.svg)
+
 
 A plugin framework for CurseForge that lets you customize and extend the app with community-made plugins.
 
