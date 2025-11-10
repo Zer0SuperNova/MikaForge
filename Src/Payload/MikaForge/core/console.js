@@ -211,16 +211,16 @@
         const menuItem = document.createElement('li');
         menuItem.className = 'user-menu-item mika-console-menu-item';
         
-        // Create link (matching the style of settings button exactly)
+        // Create link
         const toggleButton = document.createElement('a');
         toggleButton.className = 'tab';
         toggleButton.href = '#';
         toggleButton.setAttribute('data-discover', 'true');
         toggleButton.setAttribute('draggable', 'false');
         toggleButton.title = 'MikaForge Console';
-        // Don't add inline styles - let CSS handle everything
+        // Don't add inline styles
         
-        // Create SVG icon - terminal/console icon (same size as settings icon)
+        // Create SVG icon
         const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
         svg.setAttribute('viewBox', '0 0 24 24');
         svg.setAttribute('width', '24');
@@ -290,11 +290,10 @@
             console.error('[MikaForge Console] ERROR: Menu item not properly inserted!');
         }
         
-        // Expose function for manual testing
         window.__mikaForgeAddConsoleButton = addConsoleToSidebar;
     }
     
-    // Watch for when the sidebar is created dynamically
+    // Watch for when the sidebar is created
     function waitForSidebar() {
         const systemSideMenu = document.querySelector('.system-side-menu');
         if (systemSideMenu) {
@@ -303,7 +302,7 @@
                 return true; // Already added
             }
             
-            // Check if the settings button exists (sidebar is ready)
+            // Check if the settings button exists
             const userMenu = systemSideMenu.querySelector('.user-menu');
             const settingsItem = userMenu?.querySelector('li:last-child');
             if (settingsItem) {
@@ -327,11 +326,11 @@
     
     // Use MutationObserver to watch for when sidebar is created
     const sidebarObserver = new MutationObserver((mutations) => {
-        // Check if sidebar exists now and button hasn't been added
+        // Check if sidebar exists
         if (!document.querySelector('.mika-console-menu-item')) {
             const systemSideMenu = document.querySelector('.system-side-menu');
             if (systemSideMenu) {
-                // Check if settings button exists (sidebar is fully loaded)
+                // Check if settings button exists
                 const userMenu = systemSideMenu.querySelector('.user-menu');
                 const settingsItem = userMenu?.querySelector('li:last-child');
                 if (settingsItem) {
@@ -358,7 +357,6 @@
         });
     }
     
-    // Also watch specifically for .system-side-menu to appear
     const systemSideMenuObserver = new MutationObserver(() => {
         const systemSideMenu = document.querySelector('.system-side-menu');
         if (systemSideMenu && !document.querySelector('.mika-console-menu-item')) {
@@ -377,14 +375,12 @@
         });
     }
     
-    // Also try immediately and with a retry mechanism
     let attempts = 0;
     const maxAttempts = 100; // 10 seconds max
     
     function tryAddConsole() {
         attempts++;
         if (waitForSidebar()) {
-            // Success! Stop trying
             return;
         } else if (attempts < maxAttempts) {
             setTimeout(tryAddConsole, 100);
@@ -393,7 +389,6 @@
         }
     }
     
-    // Start trying immediately
     tryAddConsole();
     
     // Also try when DOM is ready
@@ -401,14 +396,12 @@
         document.addEventListener('DOMContentLoaded', tryAddConsole);
     }
     
-    // Try after various delays to catch late-loading sidebars
     setTimeout(tryAddConsole, 500);
     setTimeout(tryAddConsole, 1000);
     setTimeout(tryAddConsole, 2000);
     setTimeout(tryAddConsole, 3000);
     setTimeout(tryAddConsole, 5000);
     
-    // Also expose a manual trigger that can be called from browser console
     window.__mikaForgeTryAddConsole = tryAddConsole;
     
     // Console state
@@ -449,20 +442,6 @@
             }).catch(err => {
                 console.error('Failed to copy:', err);
             });
-        } else {
-            // Fallback for older browsers
-            const textArea = document.createElement('textarea');
-            textArea.value = text;
-            textArea.style.position = 'fixed';
-            textArea.style.opacity = '0';
-            document.body.appendChild(textArea);
-            textArea.select();
-            try {
-                document.execCommand('copy');
-            } catch (err) {
-                console.error('Failed to copy:', err);
-            }
-            document.body.removeChild(textArea);
         }
     }
     
@@ -539,7 +518,7 @@
         consoleOutput.scrollTop = consoleOutput.scrollHeight;
     }
     
-    // Execute command using script injection (works with CSP 'unsafe-inline')
+    // Execute command using script injection
     function executeCommand(command) {
         if (!command.trim()) return;
         
@@ -656,12 +635,10 @@
             consoleContainer.style.transform = 'translate(-50%, -50%)';
             hasBeenDragged = false; // Reset so it centers next time too
             
-            // Show console with fade-in animation
             consoleContainer.style.display = 'flex';
             consoleContainer.style.visibility = 'visible';
             consoleContainer.style.pointerEvents = 'auto';
             
-            // Trigger fade-in after a tiny delay to ensure display is set
             requestAnimationFrame(() => {
                 requestAnimationFrame(() => {
                     consoleContainer.style.opacity = '1';
@@ -681,7 +658,6 @@
             consoleContainer.style.opacity = '0';
             consoleContainer.style.pointerEvents = 'none';
             
-            // Hide after animation completes
             setTimeout(() => {
                 if (!isOpen) {
                     consoleContainer.style.visibility = 'hidden';
@@ -757,7 +733,7 @@
         const rect = consoleContainer.getBoundingClientRect();
         dragOffset.x = e.clientX - rect.left;
         dragOffset.y = e.clientY - rect.top;
-        // Remove transform when dragging starts (if it was centered)
+        // Remove transform when dragging starts
         if (!hasBeenDragged) {
             consoleContainer.style.transform = 'none';
             // Convert from centered position to absolute position
