@@ -32,13 +32,17 @@ MikaForge modifies the CurseForge desktop client to add a plugin system, similar
 3. Run the installer
 4. Restart CurseForge
 
-## Installing Plugins
+## Installing Plugins / Themes
 
 #### You can find example plugins in the `/plugins` folder of this repository.
-Drop plugin files into the plugins folder:
+Drop plugins into the plugins folder:
 - Windows: `%appdata%/MikaForge/plugins`
 
-Restart CurseForge or use the reload button
+#### You can find example Themes in the `/themes` folder of this repository.
+- Drop themess into the themes folder:
+- Windows: `%appdata%/MikaForge/themes`
+
+Restart CurseForge or use the reload button (Plugins only, when using a theme go to the settings and enable it)
 
 ## FAQ
 
