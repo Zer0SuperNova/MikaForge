@@ -15,6 +15,8 @@ async function compiler()
     // create temp folder
     await createTempFolder(tempFolder);
 
+    logger.notify("Zipping payload folder...");
+
     // copy source to temp folder
     const targetSrcFolder = path.join(tempFolder, 'Src');
     await fs.cp('./Src', targetSrcFolder, { recursive: true });
@@ -34,24 +36,33 @@ async function compiler()
     // write zip to main.js
     let modifiedMain = main.replace('const PayloadFolderBase64 = "";', `const PayloadFolderBase64 = "${zipBuffer.toString('base64')}";`);
     await fs.writeFile(path.join(tempFolder, 'main.js'), modifiedMain);
+    logger.notify("Payload folder zipped successfully");
+
+    logger.notify("Starting Bun Compiler...");
 
     // copy node_modules and package.json to temp folder
     await fs.cp('./node_modules', path.join(tempFolder, 'node_modules'), { recursive: true });
     await fs.cp('./package.json', path.join(tempFolder, 'package.json'));
 
     // compile with bun
-    const child = child_process.spawn('bun', ['build', 'main.js', '--compile', '--outfile', 'mikaforge.exe'], { cwd: tempFolder });
+    const child = child_process.spawn('bun', [
+        'build', 'main.js', 
+        '--compile', 
+        '--minify',
+        '--bundle',
+        '--outfile', 
+        'mikaforge.exe'], { cwd: tempFolder });
     child.stdout.on('data', (data) => {
-        logger.notify(data.toString());
+        logger.notify(`BUN COMPILER: ${data.toString()}`);
     });
     child.stderr.on('data', (data) => {
         logger.error(data.toString());
     });
-    child.on('close', (code) => {
+    child.on('close', async (code) => {
         if(code === 0) {
-            logger.notify("Build completed successfully");
+            logger.success("Build completed successfully");
             // copy mikaforge.exe current folder
-            fs.copyFile(path.join(tempFolder, 'mikaforge.exe'), path.join(__dirname, 'mikaforge.exe'));
+            await fs.copyFile(path.join(tempFolder, 'mikaforge.exe'), path.join(__dirname, 'mikaforge.exe'));
 
             cleanup();
         }
