@@ -1,0 +1,22 @@
+.dark-skin, .cf-classic {
+
+--color-background: #070c1a;
+--surface-quartinery: #08081e;
+--title-bar-background: #120e27;
+
+}
+
+.sidenav {
+    background-color: #0c001c;
+}
+
+.cf-classic {
+  background-image: 
+    linear-gradient(rgba(0, 0, 0, 1), rgba(0, 0, 0, 0.5)), /* dark overlay */
+    url("https://i.ibb.co/JR6SSMpv/blue-galaxy-with-rays-yrhdzsnvjrzvjbmz.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+  --surface-brand-brand: #ff00e0;
+  --surface-brand-brand-hover: #ff00e0;
+}
