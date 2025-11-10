@@ -48,6 +48,11 @@ No idea. We're not responsible if it does.
 **Does this work with the Overwolf Version?**  
 No.
 
+## Compiling from Source
+
+To compile the project, run `bun run compile`. This will build the project and output the compiled files in the `/Packer` folder.
+
+To compile the uninstaller, run `bun run compile_remover`. This will build the uninstaller and output as `Uninstaller.exe`.
 
 ## Contributing
 

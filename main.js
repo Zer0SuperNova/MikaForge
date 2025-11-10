@@ -14,6 +14,7 @@ import fs from 'node:fs/promises';
 import logger from './Src/Utils/logger.js';
 import JSZip from 'jszip';
 import os from 'node:os';
+import utils from './Src/Utils/utils.js';
 
 // this will only be used from the packer, DO NOT DELETE!
 // START PAYLOAD
@@ -36,7 +37,7 @@ async function main()
             await fs.mkdir(mikaForgePath);
         }
 
-        const CurseForgePath = await findCurseForge();
+        const CurseForgePath = await utils.findCurseForge();
         const CurseForgePathResource = path.join(CurseForgePath, 'resources');
 
         //patch the ASAR file
@@ -127,39 +128,6 @@ async function payloadExtraction(CurseForgePathResource, MikaPayloadPath, bridge
 
     // save a copy of mika to appdata
     await saveMikaForgeCode(MikaPayloadPath);
-}
-
-/**
- * Finds the path of the CurseForge folder in the local programs directory.
- * If an error occurs while searching the directory, the function will return null.
- * @returns {string|null} The path of the CurseForge folder, or null if not found.
- */
-async function findCurseForge() {
-    const localProgramsPath = path.join(
-        process.env.LOCALAPPDATA,
-        'Programs'
-    );
-
-    try {
-        // Read all items in the directory
-        const items = await fs.readdir(localProgramsPath, { withFileTypes: true });
-        
-        // Find CurseForge folder
-        const curseForgeItem = items.find(item => 
-            item.isDirectory() && item.name.toLowerCase().includes('curseforge')
-        );
-        
-        if (curseForgeItem) {
-            const fullPath = path.join(localProgramsPath, curseForgeItem.name);
-            return fullPath;
-        } else {
-            console.log('CurseForge not found');
-            return null;
-        }
-    } catch (error) {
-        console.error('Error searching directory:', error);
-        return null;
-    }
 }
 
 

@@ -7,7 +7,8 @@
   "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "compile": "bun run ./Packer/compiler.js"
+    "compile": "bun run ./Packer/compiler.js",
+    "compile_remover": "bun build remove.js --compile --minify --bundle --outfile Uninstaller.exe"
   },
   "engines": {
     "bun": ">=1.0.0"
