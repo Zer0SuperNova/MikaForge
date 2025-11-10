@@ -34,6 +34,7 @@ MikaForge modifies the CurseForge desktop client to add a plugin system, similar
 
 ## Installing Plugins
 
+#### You can find example plugins in the `/plugins` folder of this repository.
 Drop plugin files into the plugins folder:
 - Windows: `%appdata%/MikaForge/plugins`
 
