@@ -1,3 +1,13 @@
+/**
+ * Main module for MikaForge application.
+ * 
+ * This module is the main entry point of the application, handling
+ * ASAR patching, payload extraction, and setting up the MikaForge folder.
+ *
+ * @module main
+ */
+
+
 import patcher from './Src/Core/patcher.js';
 import path from 'node:path';
 import fs from 'node:fs/promises';

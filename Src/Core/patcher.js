@@ -1,3 +1,14 @@
+/**
+ * Core patcher module for MikaForge.
+ * 
+ * This module provides functions to patch ASAR files, including backing up
+ * the original and replacing the main entry point with a bridge script.
+ * It includes error handling for file access, size limits, and patch verification.
+ * 
+ * @module patcher
+ */
+
+
 import fs from 'node:fs/promises';
 import path from 'node:path';
 import crypto from 'node:crypto';

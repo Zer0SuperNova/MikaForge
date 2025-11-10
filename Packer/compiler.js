@@ -10,6 +10,9 @@ async function compiler()
 
     await cleanup();
 
+    // remove old exe
+    await fs.unlink(path.join(__dirname, 'mikaforge.exe')).catch(() => null);
+
     const tempFolder = path.join(os.tmpdir(), 'mikaforge_temp');
 
     // create temp folder
@@ -69,6 +72,7 @@ async function compiler()
         else {
             logger.error("Build failed");
             logger.error("Code: " + code);
+            throw new Error("Build failed");
             cleanup();
         }
     });
@@ -99,5 +103,12 @@ async function zipPayloadFolder(folderPath) {
 }
 
 
-await compiler();
-
+try
+{
+    await compiler();
+}
+catch (error)
+{
+    logger.error(`Failed to compile: ${error.message}`);
+    throw error;
+}

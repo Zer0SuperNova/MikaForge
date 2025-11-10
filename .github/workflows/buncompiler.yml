@@ -1,0 +1,26 @@
+name: Build Tester
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Install Bun runtime
+        run: curl -fsSL https://bun.sh/install | bash
+
+      - name: Add Bun to PATH
+        run: echo "${HOME}/.bun/bin" >> $GITHUB_PATH
+
+      - name: install dependencies
+        run: bun install
+
+      - name: Run compiler using Bun
+        run: bun run compile

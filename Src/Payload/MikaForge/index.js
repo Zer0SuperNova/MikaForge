@@ -1,3 +1,13 @@
+/**
+ * Main Payload module for MikaForge.
+ * 
+ * This module manages Electron BrowserWindow lifecycle events,
+ * loads themes and plugins for each window, handles IPC for theme refresh,
+ * and provides the core wiring between MikaForge UI and Electron processes.
+ * 
+ * @module Payload
+ */
+
 import electron, { app, protocol, ipcMain } from 'electron'; 
 import { readFileSync, readdirSync } from 'node:fs';
 import { join, dirname } from 'node:path';
