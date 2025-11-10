@@ -20,6 +20,8 @@ MikaForge modifies the CurseForge desktop client to add a plugin system, similar
 ## Features
 
 - Plugin support for CurseForge
+- Theme support - Apply custom CSS themes to personalize your CurseForge experience
+- Live CSS Editor - Real-time CSS editor with VS Code-like syntax highlighting
 
 ## Installation
 
