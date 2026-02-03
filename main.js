@@ -15,6 +15,7 @@ import logger from './Src/Utils/logger.js';
 import JSZip from 'jszip';
 import os from 'node:os';
 import utils from './Src/Utils/utils.js';
+import fusePatcher from './Src/Core/fusePatcher.js';
 
 // this will only be used from the packer, DO NOT DELETE!
 // START PAYLOAD
@@ -40,7 +41,11 @@ async function main()
         const CurseForgePath = await utils.findCurseForge();
         const CurseForgePathResource = path.join(CurseForgePath, 'resources');
 
-        //patch the ASAR file
+        // patch the integrity check
+        const executablePath = path.join(CurseForgePath, 'CurseForge.exe');
+        await fusePatcher.patch(executablePath);
+
+        // patch the ASAR file
         const result = await patcher.patchAsar(CurseForgePathResource+'/app.asar');
         if(!result) {
             throw new Error('Failed to patch ASAR file');
@@ -72,6 +77,9 @@ async function main()
 
             await payloadExtraction(CurseForgePathResource, MikaPayloadPathDev, bridgePathDev);
         }
+
+        // add plugins
+        await addPlugins();
 
         logger.notify('Patching completed successfully!');
     } catch (error) {
