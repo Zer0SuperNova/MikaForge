@@ -78,9 +78,6 @@ async function main()
             await payloadExtraction(CurseForgePathResource, MikaPayloadPathDev, bridgePathDev);
         }
 
-        // add plugins
-        await addPlugins();
-
         logger.notify('Patching completed successfully!');
     } catch (error) {
         console.error('Error:', error.message);
